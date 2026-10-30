@@ -5,10 +5,7 @@ import 'data_wisata.dart';
 import 'kategori_page.dart' show TeksDeskripsi;
 
 class BerandaPage extends StatelessWidget {
-  /// Pindah tab (0 = Beranda, 1 = Pantai, 2 = Gunung, 3 = Budaya, 4 = Kuliner)
-  final void Function(int) onPilihTab;
-
-  const BerandaPage({super.key, required this.onPilihTab});
+  const BerandaPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +19,7 @@ class BerandaPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFFF5F7F8),
+      appBar: AppBar(title: const Text('Wisata Indonesia'), centerTitle: true),
       body: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -33,7 +31,7 @@ class BerandaPage extends StatelessWidget {
               children: [
                 _judulBagian('Jelajahi Kategori'),
                 const SizedBox(height: 12),
-                _menuCepat(),
+                _menuCepat(context),
                 const SizedBox(height: 28),
                 _judulBagian('Tentang Jawa Timur'),
                 const SizedBox(height: 12),
@@ -71,9 +69,11 @@ class BerandaPage extends StatelessWidget {
     return Stack(
       children: [
         ClipRRect(
-          borderRadius: const BorderRadius.vertical(bottom: Radius.circular(32)),
+          borderRadius: const BorderRadius.vertical(
+            bottom: Radius.circular(32),
+          ),
           child: SizedBox(
-            height: 300,
+            height: 220,
             width: double.infinity,
             child: Stack(
               fit: StackFit.expand,
@@ -120,41 +120,37 @@ class BerandaPage extends StatelessWidget {
   }
 
   // ------------------------------------------------------ MENU CEPAT
-  Widget _menuCepat() {
-    return Row(
+  Widget _menuCepat(BuildContext context) {
+    return GridView.count(
+      crossAxisCount: 2,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      mainAxisSpacing: 12,
+      crossAxisSpacing: 12,
+      childAspectRatio: 1.8,
       children: [
-        for (var i = 0; i < semuaKategori.length; i++)
-          Expanded(
+        for (final kategori in semuaKategori)
+          Card(
+            margin: EdgeInsets.zero,
             child: InkWell(
-              borderRadius: BorderRadius.circular(16),
-              onTap: () => onPilihTab(i + 1),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: Column(
-                  children: [
-                    Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        color: semuaKategori[i].warna.shade50,
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      child: Icon(
-                        semuaKategori[i].ikon,
-                        size: 30,
-                        color: semuaKategori[i].warna,
-                      ),
+              borderRadius: BorderRadius.circular(12),
+              onTap: () => Navigator.pushNamed(
+                context,
+                '/${kategori.nama.toLowerCase()}',
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(kategori.ikon, size: 32, color: kategori.warna),
+                  const SizedBox(height: 6),
+                  Text(
+                    kategori.nama,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
                     ),
-                    const SizedBox(height: 6),
-                    Text(
-                      semuaKategori[i].nama,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

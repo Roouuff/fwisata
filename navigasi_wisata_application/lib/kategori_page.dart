@@ -21,23 +21,18 @@ class KategoriPage extends StatelessWidget {
         backgroundColor: kategori.warna.shade800,
         foregroundColor: Colors.white,
         centerTitle: true,
-        // Ikon kategori di kiri atas
-        leading: Icon(kategori.ikon, color: Colors.white),
-        // Nama halaman di tengah (Pantai / Gunung / Budaya / Kuliner)
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          tooltip: 'Kembali',
+          onPressed: onKeluar ?? () => Navigator.pop(context),
+        ),
         title: Text(
           kategori.nama,
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        // Tombol keluar di kanan atas (kembali ke beranda)
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            tooltip: 'Keluar',
-            onPressed: onKeluar ?? () => Navigator.pop(context),
-          ),
-        ],
       ),
       body: ListView(
+        key: PageStorageKey('kategori-${kategori.nama}'),
         padding: const EdgeInsets.all(16),
         children: [
           Text(

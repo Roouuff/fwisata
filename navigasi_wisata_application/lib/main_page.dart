@@ -22,7 +22,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     final halaman = <Widget>[
-      BerandaPage(onPilihTab: _ganti),
+      const BerandaPage(),
       for (final k in semuaKategori)
         KategoriPage(kategori: k, onKeluar: () => _ganti(0)),
     ];
@@ -40,10 +40,7 @@ class _MainPageState extends State<MainPage> {
             label: 'Beranda',
           ),
           for (final k in semuaKategori)
-            NavigationDestination(
-              icon: Icon(k.ikon),
-              label: k.nama,
-            ),
+            NavigationDestination(icon: Icon(k.ikon), label: k.nama),
         ],
       ),
     );

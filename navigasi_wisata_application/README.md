@@ -4,10 +4,11 @@ Aplikasi Flutter untuk menjelajahi informasi wisata di Jawa Timur. Konten disaji
 
 ## Fitur
 
-- Beranda dengan gambar hero, pengantar Jawa Timur, galeri foto, dan rekomendasi wisata.
+- Beranda dengan AppBar "Wisata Indonesia", menu kategori `GridView.count` dua kolom, gambar hero, pengantar Jawa Timur, galeri foto, dan rekomendasi wisata.
 - Navigasi bawah untuk berpindah antara Beranda, Pantai, Gunung, Budaya, dan Kuliner.
+- Rute bernama untuk membuka halaman Pantai (`/pantai`), Gunung (`/gunung`), Budaya (`/budaya`), dan Kuliner (`/kuliner`) dari menu beranda.
 - Halaman kategori berisi pengantar dan daftar tempat wisata beserta gambar dan deskripsinya.
-- Tombol **Lihat Detail** membuka halaman yang menampilkan nama tempat wisata.
+- Tombol **Lihat Detail** mengirimkan nama tempat wisata melalui route arguments ke halaman Detail Wisata (`/detail`); tombol kembali membawa pengguna ke halaman sebelumnya.
 - Seluruh gambar disimpan sebagai aset lokal sehingga dapat ditampilkan tanpa mengambil gambar dari layanan eksternal.
 
 ## Teknologi
@@ -58,7 +59,7 @@ lib/
   main_page.dart            # Navigasi bawah dan halaman utama
   beranda_page.dart         # Beranda, galeri, dan rekomendasi
   kategori_page.dart        # Tampilan daftar wisata per kategori
-  detail_wisata_page.dart  # Halaman nama tempat wisata
+  detail_wisata_page.dart   # Halaman Detail Wisata yang menerima nama tempat
   data_wisata.dart          # Data kategori, wisata, dan teks
 assets/
   beranda/                  # Gambar hero dan galeri
